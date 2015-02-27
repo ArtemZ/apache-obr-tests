@@ -4,6 +4,7 @@ import org.apache.felix.main.AutoProcessor;
 import org.osgi.framework.*;
 import org.osgi.framework.launch.Framework;
 import org.osgi.framework.launch.FrameworkFactory;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
 class TestRepositoryAdminAutostart {
@@ -11,8 +12,9 @@ class TestRepositoryAdminAutostart {
 		Framework framework = null;
 		BundleContext bundleContext;
 		RepositoryAdmin repositoryAdmin;
-		Map config = null;
-		FrameworkFactory frameworkFactory = ServiceLoader.load(FrameworkFactory.class).iterator().next();
+		Map config = new HashMap();
+		config.put( "felix.auto.start.2", "file:///home/artemz/Documents/multicabinet/base-bundles/org.apache.felix.bundlerepository-2.0.2.jar" );
+		FrameworkFactory frameworkFactory = (FrameworkFactory) ServiceLoader.load(FrameworkFactory.class).iterator().next();
         	framework = frameworkFactory.newFramework(config);
         	try {
             	framework.init();
